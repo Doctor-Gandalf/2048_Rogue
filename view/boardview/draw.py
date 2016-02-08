@@ -34,7 +34,7 @@ def color_border(window, start, stop, color_scheme=1):
     :param color_scheme: the color to paint the border (default 1)
     :return: null
     """
-    group = [(y, x) for x, y in log.create_box(start, stop)]
+    group = log.create_box(start, stop)
     draw_group(window, group, color_scheme, ' ')
 
 
@@ -47,7 +47,7 @@ def color_hash(window, start, stop, color_scheme=1):
     :param color_scheme: the color to paint the border (default 1)
     :return: null
     """
-    group = [(y, x) for x, y in log.create_hash(start, stop)]
+    group = log.create_hash(start, stop)
     draw_group(window, group, color_scheme, ' ')
 
 
@@ -63,7 +63,7 @@ def draw_group(window, group, color_scheme=1, character=' '):
     """
     for point in group:
         try:
-            window.addstr(point[0], point[1], character, crs.color_pair(color_scheme))
+            window.addstr(point[1], point[0], character, crs.color_pair(color_scheme))
         except crs.error:
             # curses.error when point is not viewable and can safely be ignored.
             pass
